@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+    <div class="container {{#if hide_navigation}}py-4{{else}}py-5{{/if}}">
+        {{#unless hide_navigation}}
+        <header class="header fixed-top d-flex align-items-center">
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
+                    {{#if is_admin}}
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon " href="/ordenes/admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ordenes"> <i class="bi bi-file-earmark-text"></i> </a>
+                    </li>
+                    {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon " href="/carrito" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Carrito"> <i class="bi bi-bag"></i> </a>
+                    </li>
+                    {{/if}}
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon " href="/productos" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Productos"> <i class="bi bi-shop"></i> </a>
+                    </li>
+                    <li class="nav-item dropdown pe-3 ms-3">
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                            <img src="/avatar/{{avatar}}" alt="Profile" class="rounded-circle avatar-img">
+                            <span class="d-none d-md-block dropdown-toggle ps-2">{{username}}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                            <li class="dropdown-header"><h6>{{username}}</h6> <span>Usuario registrado</span></li>
+                            {{#unless is_admin}}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item d-flex align-items-center" href="/ordenes"> <i class="bi bi-file-earmark-text me-2"></i> <span>Mis ordenes</span> </a></li>
+                            {{/unless}}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item d-flex align-items-center" href="/profile"> <i class="bi bi-person me-2"></i> <span>Perfil</span> </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item d-flex align-items-center" href="/logout"> <i class="bi bi-box-arrow-right me-2"></i> <span>Cerrar sesión</span> </a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </header>
+        {{/unless}}
+        <main>
+            <div class="{{#if hide_navigation}}{{else}}mt-5{{/if}}">
+                {{>show_notifications}}
+                {{{body}}}
+            </div>
+        </main>
+    </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> <script src="./js/chat.js"></script> -->
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+</body>
+</html>

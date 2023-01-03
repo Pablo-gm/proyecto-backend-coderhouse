@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h4>Actualizar producto</h4>
+                <form class="" action="./" method="post">
+                    <input id="id" name="id" type="hidden" value="{{product.id}}">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="title" class="form-label">Nombre</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="" value="{{product.title}}">
+                        </div>
+                        <div class="col-12">
+                            <label for="description" class="form-label">Descripción</label>
+                            <input type="text" name="description" id="description" class="form-control" placeholder="" value="{{product.description}}">
+                        </div>
+                        <div class="col-12">
+                            <label for="price" class="form-label">Precio</label>
+                            <input type="text" name="price" id="price" class="form-control" placeholder="Ej. 3.50" value="{{product.price}}">
+                        </div>
+                        <div class="col-12">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="text" name="stock" id="stock" class="form-control" placeholder="Ej. 3.50" value="{{product.stock}}">
+                        </div>
+                        <div class="col-12">
+                            <label for="thumbnail" class="form-label">Thumbnail</label>
+                            <input type="text" name="thumbnail" id="thumbnail" class="form-control" placeholder="url" value="{{product.thumbnail}}">
+                        </div>
+                        <div class="col-12">
+                            <button class="w-100 btn btn-dark" type="submit">Actualizar producto</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
