@@ -114,7 +114,7 @@ passport.use('signup', new LocalStrategy({
                         `
                     }
 
-                    const emailAnswer = await sendEmail(mailOptions);
+                    //const emailAnswer = await sendEmail(mailOptions);
 
                     return done(null, userWithId);
                 });

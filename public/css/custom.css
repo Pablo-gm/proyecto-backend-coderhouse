@@ -1,3 +1,7 @@
+body{
+    background-color: #fdfaf4;
+}
+
 .alert-icon{
     width: 1em;
     height: 1em;
@@ -47,9 +51,22 @@ a {
     font-size: 22px;
     color: #012970;
     width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
     text-align: center;
     position: relative;
 }
+
+.header-nav .nav-icon:hover  {
+    background-color: var(--bs-secondary-bg-subtle);
+    color: var(--bs-primary);
+}
+
+.nav-profile:hover{
+    color: var(--bs-primary);
+}
+
 .profile-img{
     max-height: 128px;
     border: 1px solid #e9ecef;
@@ -58,6 +75,7 @@ a {
 
 .product-img{
     height: 64px;
+    padding: 4px;
     border-radius: 8px;
     border: 1px solid #e9ecef;
 }

@@ -1,4 +1,13 @@
-# TERCERA ENTREGA DEL PROYECTO FINAL
+# DIVIDIR EN CAPAS NUESTRO PROYECTO (desafio 19)
+
+### Consigna 
+Dividir en capas el proyecto entregable con el que venimos trabajando (entregable clase 16: loggers y profilers), agrupando apropiadamente las capas de ruteo, controlador, lógica de negocio y persistencia.
+
+Considerar agrupar las rutas por funcionalidad, con sus controladores, lógica de negocio con los casos de uso, y capa de persistencia.
+
+La capa de persistencia contendrá los métodos necesarios para atender la interacción de la lógica de negocio con los propios datos.
+
+# TERCERA ENTREGA DEL PROYECTO FINAL (desafio 18)
 ## Deberás entregar el avance de tu aplicación eCommerce Backend correspondiente a la tercera entrega de tu proyecto final.
 
 ### Se debe entregar:

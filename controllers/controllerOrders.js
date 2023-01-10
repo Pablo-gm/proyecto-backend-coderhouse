@@ -105,9 +105,9 @@ class OrdersController {
                     `
                 }
 
-                const emailAnswer = await sendEmail(mailOptions);
-                const answerSMS = await sendSMS('Su pedido ha sido recibido y se encuentra en proceso', req.user.phone);
-                const answerWhats = await sendWhatsapp(whatsappOrder, req.user.phone);
+                //const emailAnswer = await sendEmail(mailOptions);
+                //const answerSMS = await sendSMS('Su pedido ha sido recibido y se encuentra en proceso', req.user.phone);
+                //const answerWhats = await sendWhatsapp(whatsappOrder, req.user.phone);
 
                 req.flash(answer.status, answer.message);
             }

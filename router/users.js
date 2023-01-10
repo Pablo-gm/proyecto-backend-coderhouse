@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const { body, validationResult } =  require ('express-validator');
+const { body, validationResult } =  require('express-validator');
 
 // Login
 router.get("/", userController.login);

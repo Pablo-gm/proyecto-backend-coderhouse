@@ -1,3 +1,4 @@
 {"level":"error","message":"Error: el usuario con email: admin@admin.com no existe","timestamp":"2023-01-03 10:25:40"}
 {"level":"error","message":"Error: el usuario con email: admin@admin.com no existe","timestamp":"2023-01-03 10:29:51"}
 {"level":"error","message":"Error: Error: getaddrinfo ENOTFOUND gmail","timestamp":"2023-01-03 11:22:18"}
+{"level":"error","message":"Error: admin@mail.com passsord incorrecto","timestamp":"2023-01-10 11:11:12"}

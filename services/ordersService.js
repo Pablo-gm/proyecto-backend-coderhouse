@@ -36,7 +36,6 @@ class OrdersService {
         }
     }
     
-
 };
 
 module.exports = OrdersService;
