@@ -1,19 +1,19 @@
-const productModel = require('../models/product');
+const messageModel = require('../models/message');
 const Container = require('../containers/containerMongoDB');
 
 let instance = null;
 
-class ProductsMongo extends Container {
+class MessagesMongo extends Container {
     constructor() {
-        super(productModel);
+        super(messageModel);
     };
 
     static getInstance(){
         if(!instance){
-            instance = new ProductsMongo();
+            instance = new MessagesMongo();
         }
         return instance
     }
 };
 
-module.exports = ProductsMongo;
+module.exports = MessagesMongo;

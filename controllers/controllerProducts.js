@@ -1,4 +1,5 @@
 const ProductsService = require('../services/productsService');
+const productDTO = require('../dtos/productDTO');
 
 class ProductsController {
     constructor() {
@@ -17,16 +18,17 @@ class ProductsController {
                 error = product.message;
             }else{
                 //res.json(product);
-                products = product.data;
+                products = [new productDTO(product.data)];
             }
         }else{
             //return res.json(await Products.getAll());
             const allProducts = await this.Products.getAllProducts();
+
             if(allProducts.status === 'error'){
                 error = allProducts.message;
                 req.flash('error', error);
             }else{
-                products = allProducts.data;
+                products = allProducts.data.map(p => new productDTO(p));
             }
         }
 
@@ -52,7 +54,7 @@ class ProductsController {
     }
 
     addProduct = async (req, res) => {
-        const {title, price, thumbnail, description, stock} = req.body;
+        const {title, price, thumbnail, description, stock, category} = req.body;
         
         const newProduct = {
             title,
@@ -60,6 +62,7 @@ class ProductsController {
             thumbnail,
             description,
             stock,
+            category,
             code: `CODE_${Date.now()}`,
         }
         // maybe validate no parameter is missing?

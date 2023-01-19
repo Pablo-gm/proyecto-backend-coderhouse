@@ -26,6 +26,9 @@
                     </li>
                     {{/if}}
                     <li class="nav-item ms-2">
+                        <a class="nav-link nav-icon " href="/chat" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Chat"> <i class="bi bi-chat"></i> </a>
+                    </li>
+                    <li class="nav-item ms-2">
                         <a class="nav-link nav-icon " href="/productos" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Productos"> <i class="bi bi-shop"></i> </a>
                     </li>
                     <li class="nav-item dropdown pe-3 ms-2">
@@ -58,6 +61,10 @@
         </main>
     </div>
     <script src="/js/bootstrap.bundle.min.js"></script>
+    {{#if use_chat}}
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+    {{/if}}
     <!-- <script src="/socket.io/socket.io.js"></script> <script src="./js/chat.js"></script> -->
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

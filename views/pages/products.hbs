@@ -10,7 +10,7 @@
         {{/if}}
         {{#if products}}
             <div class="card">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table class="table table-hover text-nowrap table-borderless mb-0">
                         <thead>
                             <tr class="">
@@ -28,7 +28,7 @@
                             {{#each products}}
                             <tr class="align-middle">
                                 <td class="text-center"><img src="{{this.thumbnail}}" alt="{{this.title}}" class="product-img"></td>
-                                <td class="">{{this.title}}</td>
+                                <td class="">{{this.title}} <br> <span class="text-secondary">{{this.id}}</span> </td>
                                 <td class="">{{this.description}}</td>
                                 <td class="">{{this.code}}</td>
                                 <td class="text-end">${{this.price}}</td>

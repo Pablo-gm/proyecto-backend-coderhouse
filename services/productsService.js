@@ -1,12 +1,14 @@
-const { Products } = require('../daos/dao.js');
 const {errorLogger} = require('../utils/logger');
+
+const ProductRepo = require('../repositories/productRepository')
+const productRepo = new ProductRepo();
 
 class ProductsService {
     constructor() {};
 
     async getAllProducts() {
         try {
-            return await Products.getAll();
+            return await productRepo.getAll();
         } catch (err) {
             errorLogger.error(`Error: ${err}`);
         }
@@ -14,7 +16,7 @@ class ProductsService {
 
     async getProductsByIdArray(ids) {
         try {
-            return await Products.getByIdArray(ids);
+            return await productRepo.getByIdArray(ids);
         } catch (err) {
             errorLogger.error(`Error: ${err}`);
         }
@@ -22,7 +24,7 @@ class ProductsService {
 
     async getProductById(id) {
         try {
-            return await Products.getById(id);
+            return await productRepo.getById(id);
         } catch (err) {
             errorLogger.error(`Error: ${err}`);
         }
@@ -30,7 +32,7 @@ class ProductsService {
 
     async getProductsByIds(ids) {
         try {
-            return await Products.getByIdArray(ids);
+            return await productRepo.getByIdArray(ids);
         } catch (err) {
             errorLogger.error(`Error: ${err}`);
         }
@@ -38,7 +40,7 @@ class ProductsService {
 
     async addProduct(product) {
         try {
-            return await Products.save(product);
+            return await productRepo.save(product);
         } catch (err) {
             errorLogger.error(`Error: ${err}`);
         }
@@ -46,7 +48,7 @@ class ProductsService {
 
     async updateProduct(id,product) {
         try {
-            return await Products.update(id,product);
+            return await productRepo.update(id,product);
         } catch (err) {
             errorLogger.error(`Error: ${err}`);
         }
@@ -54,7 +56,7 @@ class ProductsService {
 
     async deleteProductById(id) {
         try {
-            return await Products.deleteById(id);
+            return await productRepo.deleteById(id);
         } catch (err) {
             errorLogger.error(`Error: ${err}`);
         }

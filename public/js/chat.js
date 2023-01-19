@@ -1,68 +1,46 @@
 const socket = io();
-console.log("empezamos");
-const catalogoElement = document.querySelector('#catalogo');
+console.log("contectado");
+
 const chatElement = document.querySelector('#chat');
+/*
+const counterElement = document.querySelector('#counter');
+let count = 15;
 
-function addMessage(e) {
-    if(document.querySelector('#email').value){
-        const fecha = new Date();
-
-        const mensaje = {
-            email: document.querySelector('#email').value,
-            text: document.querySelector('#message').value,
-            date: fecha.toLocaleString()
-        };
-
-        socket.emit('addMessage', mensaje);
+var interval = setInterval(function() { 
+    if (count > 0) {
+        counterElement.textContent = count;
+        count--;
     }
-
-    return false;
-}
+    else {
+        counterElement.textContent = '... actualizando';
+        socket.emit('getMessages', 1);
+        //clearInterval(interval);
+        count = 15;
+    }
+}, 1000);
+*/
 
 const renderMessages = messages => {
     const html = messages.map((message, index) => {
+        const date = new Date(message.createdAt);
+
         return(
             `
-            <div class="">
-                <strong class="text-info">${message.email}</strong>
-                <span class="text-warning">[${message.date}]</span>:
-                <i class="text-success">${message.text}</i>
+            <div class="message ${message.is_system ? 'message-left' : 'message-right' }">
+                <div class="message-avatar ${message.is_system ? '' : 'message-js' }" data-email="${message.email}">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="flex-shrink-1 message-body rounded py-2 px-3 mr-3">
+                    <div class="fw-semibold mb-1">${message.is_system ? 'Para:' : 'De:' } ${message.email}</div> 
+                    ${message.body}
+                    <div class="text-muted small text-nowrap mt-2">${date.toLocaleString()}</div>
+                </div>
             </div>
             `
         )
     }).join(" ");
     chatElement.innerHTML = html;
 }
-
-
-function addProduct(e) {
-    const producto = {
-        title: document.querySelector('#title').value,
-        price: document.querySelector('#price').value,
-        thumbnail: document.querySelector('#thumbnail').value
-    };
-    socket.emit('addProduct', producto);
-    return false;
-}
-
-const renderProducts = products => {
-    const html = products.map((product, index) => {
-        return(
-            `
-            <tr class="align-middle">
-                <td class="">${product.title}</td>
-                <td class="text-end">${product.price}</td>
-                <td class="text-center"><img src="${product.thumbnail}" alt="${product.title}"></td>
-            </tr>
-            `
-        )
-    }).join(" ");
-    catalogoElement.innerHTML = html;
-}
-
-socket.on('products', products => {
-    renderProducts(products);
-});
 
 socket.on('messages', messages => {
     renderMessages(messages);

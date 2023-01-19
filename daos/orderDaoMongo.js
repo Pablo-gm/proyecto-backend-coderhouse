@@ -4,6 +4,8 @@ const CartsMongo = require('./cartDaoMongo');
 const UsersMongo = require('./userDaoMongo');
 const {errorLogger} = require('../utils/logger');
 
+let instance = null;
+
 class OrdersMongo extends Container {
     constructor() {
         super(orderModel);
@@ -57,6 +59,13 @@ class OrdersMongo extends Container {
             errorLogger.error(`Error: ${err}`);
             return { status: 'error', message: `Error al encontrar ordenes: ${err}` };
         }
+    }
+
+    static getInstance(){
+        if(!instance){
+            instance = new OrdersMongo();
+        }
+        return instance
     }
 
 };

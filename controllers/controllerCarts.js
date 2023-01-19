@@ -1,5 +1,7 @@
 const CartsService = require('../services/cartsService');
 const ProductsService = require('../services/productsService');
+const cartDTO = require('../dtos/cartDTO');
+const productDTO = require('../dtos/productDTO');
 
 class CartsController {
     constructor() {
@@ -17,16 +19,19 @@ class CartsController {
             if(answer.status === 'error'){
                 req.flash('error', `No se encontró carrito con id: ${req.params.id}`);
             }else{
-                cart = answer.data;
+                cart = new cartDTO(answer.data);
+
                 const productsIds = cart.products.map(p => p.product);
                 const productsAnswer = await this.Products.getProductsByIdArray(productsIds);
+
                 if(productsAnswer.status === 'error'){
                     req.flash('error', `Error al obtener productos del carrito`);
                 }else{
                     products = [];
                     productsAnswer.data.forEach( (p, index) => {
                         total +=  p.price * cart.products[index].quantity;
-                        products.push({product: p, quantity: cart.products[index].quantity, total: p.price * cart.products[index].quantity});
+                        const tempProduct = {product: new productDTO(p), quantity: cart.products[index].quantity, total: p.price * cart.products[index].quantity};
+                        products.push(tempProduct);
                     })
                 }
             }
@@ -50,31 +55,6 @@ class CartsController {
         }
 
         res.render('pages/carts', {carts, notifications: req.flash() } );
-    }
-
-    getCartById = async (req, res) => {
-        let cart;
-        let products;
-
-        if(req.params.id){
-            const answer = await this.Carts.getCartById(req.params.id);
-            if(answer.status === 'error'){
-                req.flash('error', `No se encontró carrito con id: ${req.params.id}`);
-            }else{
-                cart = answer.data;
-                const allProducts = await this.Products.getAllProducts();
-                if(allProducts.status === 'error'){
-                    error = allProducts.message;
-                    req.flash('error', error);
-                }else{
-                    products = allProducts.data;
-                }
-            }
-        }else{
-            req.flash('error', 'El ID es requerido');
-        }
-
-        res.render('pages/updateCart', {cart , products,  notifications: req.flash() } );
     }
 
     createCart = async (req, res) => {
@@ -124,7 +104,7 @@ class CartsController {
                 if(answer.status === 'error'){
                     req.flash('error', answer.message);
                 }else{
-                    req.flash('success', `Producto agregado al carrito.`);
+                    req.flash(answer.status, `Producto agregado al carrito.`);
                 }
             }else{
                 req.flash('error', 'El ID del producto y el carrito son necesarios.');

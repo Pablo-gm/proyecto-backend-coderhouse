@@ -2,3 +2,6 @@
 {"level":"error","message":"Error: el usuario con email: admin@admin.com no existe","timestamp":"2023-01-03 10:29:51"}
 {"level":"error","message":"Error: Error: getaddrinfo ENOTFOUND gmail","timestamp":"2023-01-03 11:22:18"}
 {"level":"error","message":"Error: admin@mail.com passsord incorrecto","timestamp":"2023-01-10 11:11:12"}
+{"level":"error","message":"Error: TypeError: productRepo.getAll is not a function","timestamp":"2023-01-17 10:19:07"}
+
+{"level":"error","message":"Error: TypeError: Cannot read properties of undefined (reading 'getAll')","timestamp":"2023-01-18 11:51:08"}

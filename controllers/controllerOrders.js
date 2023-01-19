@@ -2,6 +2,8 @@ const CartsService = require('../services/cartsService');
 const OrdersService = require('../services/ordersService');
 const ProductsService = require('../services/productsService');
 
+const orderDTO = require('../dtos/orderDTO');
+
 const sendEmail = require('../utils/nodemailerGmail');
 const {sendSMS, sendWhatsapp} = require('../utils/twilio');
 const { ADMIN_EMAIL, NOTIFICATIONS_EMAIL } = require('../config/options')
@@ -22,7 +24,7 @@ class OrdersController {
             error = allOrders.message;
             req.flash('error', error);
         }else{
-            orders = allOrders.data;
+            orders = allOrders.data.map(ord => new orderDTO(ord));
         }
 
         res.render('pages/ordersAll', {orders, notifications: req.flash() } );
@@ -36,7 +38,7 @@ class OrdersController {
             if(answer.status === 'error'){
                 req.flash(answer.status, answer.message);
             }else{
-                orders = answer.orders;
+                orders = answer.orders.map(ord => new orderDTO(ord));
             }
             
         }else{

@@ -1,9 +1,14 @@
 require('dotenv').config();
 
+const parseArgs  = require('minimist');
+const args = parseArgs(process.argv.slice(2),  { alias: { dao: "DAO"}, default: { DAO: "mongodb" } });
+
+const DAO_METHOD = process.env.DAO_METHOD || args.DAO || 'mongodb';
+
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ecommerce';
 const PORT = process.env.PORT || 8080;
 const USE_CLUSTER = process.env.USE_CLUSTER || 0;
-const SESSION_LIMIT = process.env.SESSION_LIMIT || 600000;
+const SESSION_LIMIT = process.env.SESSION_LIMIT || 900000;
 
 
 // Nodemailer Gmail
@@ -38,4 +43,4 @@ const firebaseConfig = {
     }
 }
 
-module.exports = {MONGO_URI, PORT, USE_CLUSTER, SESSION_LIMIT, ADMIN_EMAIL, ADMIN_EMAIL_PASS, NOTIFICATIONS_EMAIL,IGNORE_TWILIO, twilioConfig,  firebaseConfig};
+module.exports = {DAO_METHOD, MONGO_URI, PORT, USE_CLUSTER, SESSION_LIMIT, ADMIN_EMAIL, ADMIN_EMAIL_PASS, NOTIFICATIONS_EMAIL,IGNORE_TWILIO, twilioConfig,  firebaseConfig};

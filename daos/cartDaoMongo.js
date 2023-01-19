@@ -3,10 +3,12 @@ const Container = require('../containers/containerMongoDB');
 const ProductsMongo = require('./productDaoMongo');
 const {errorLogger} = require('../utils/logger');
 
+let instance = null;
+
 class CartsMongo extends Container {
     constructor() {
         super(cartModel);
-        this.products = new ProductsMongo();
+        this.products = ProductsMongo.getInstance();
     };
 
     async addToCart(id, pid, quantity) {
@@ -94,6 +96,13 @@ class CartsMongo extends Container {
             return { status: 'error', message: `Error al intentar vaciar el carrito: ${err}` };
         }
 
+    }
+
+    static getInstance(){
+        if(!instance){
+            instance = new CartsMongo();
+        }
+        return instance
     }
 
 };

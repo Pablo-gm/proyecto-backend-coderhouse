@@ -22,10 +22,17 @@ const cluster = require(`cluster`);
 const os = require(`os`);
 const numCPUs = os.cpus().length;
 
+const { Server: HttpServer } = require('http');
+const { Server: IOServer } = require('socket.io');
+const MessagesService = require('./services/messagesService');
+const messageDTO = require('./dtos/messageDTO');
+
 const app = express();
+const httpserver = new HttpServer(app);
+const io = new IOServer(httpserver);
 
 const initServer = (PORT) => {
-    app.listen(PORT, async () => {
+    httpserver.listen(PORT, async () => {
         await mongoose.connect(MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
@@ -115,3 +122,25 @@ app.engine('hbs', expressHbs.engine({
 
 app.set('views', './views');
 app.set('view engine', 'hbs');
+
+const messageService = new MessagesService;
+
+io.on('connection', async socket => {
+
+    let ms = await messageService.getAllMessages();
+    let emitMs;
+
+    if(ms.status === 'success'){
+        emitMs = ms.data.map(m => new messageDTO(m));
+        io.sockets.emit('messages', emitMs);
+    }
+    /*
+    socket.on('getMessages', async mensaje => {
+        ms = await messageService.getAllMessages();
+        if(ms.status === 'success'){
+            emitMs = ms.data.map(m => new messageDTO(m));
+            io.sockets.emit('messages', emitMs);
+        }
+    })
+    */
+});

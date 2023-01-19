@@ -1,4 +1,4 @@
-const { Orders } = require('../daos/dao.js');
+const { Orders } = require('../daos/daoFactory.js');
 const {errorLogger} = require('../utils/logger');
 
 class OrdersService {
