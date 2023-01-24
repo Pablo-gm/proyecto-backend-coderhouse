@@ -20,10 +20,13 @@ Creamos la carpeta /tests con las pruebas, además de unos comando para npm
     "test-supertest": "mocha tests/supertest.tests.js"
 ```
 
-Resultados:
+Resultados axios:
+
 ![Pruebas axios](tests/axios.png)
 
-![Pruebas supertests](tests/supertest.png)
+Resultados supertest:
+
+![Pruebas supertest](tests/supertest.png)
 
 # MEJORAR LA ARQUITECTURA DE NUESTRA API (desafio 20) 
 ### Consignas 
