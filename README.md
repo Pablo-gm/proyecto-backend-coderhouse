@@ -1,3 +1,30 @@
+# TESTEAMOS NUESTRA API REST (desafio 21) 
+### Consignas
+Revisar en forma completa el proyecto entregable que venimos realizando, refactorizando y reformando todo lo necesario para llegar al esquema de servidor API RESTful en capas planteado en esta clase.
+
+Asegurarse de dejar al servidor bien estructurado con su ruteo / controlador, negocio, validaciones, persistencia y configuraciones (preferentemente utilizando en la codificación clases de ECMAScript).
+
+No hace falta realizar un cliente ya que utilizaremos tests para verificar el correcto funcionamiento de las funcionalidades desarrolladas.
+
+- Desarrollar un cliente HTTP de pruebas que utilice Axios para enviar peticiones, y realizar un test de la funcionalidad hacia la API Rest de productos, verificando la correcta lectura de productos disponibles, incorporación de nuevos productos, modificación y borrado.
+- Realizar el cliente en un módulo independiente y desde un código aparte generar las peticiones correspondientes, revisando los resultados desde la base de datos y en la respuesta del servidor obtenida en el cliente HTTP.
+- Luego, realizar las mismas pruebas, a través de un código de test apropiado, que utilice mocha, chai y Supertest, para probar cada uno de los métodos HTTP de la API Rest de productos.
+- Escribir una suite de test para verificar si las respuestas a la lectura, incorporación, modificación y borrado de productos son las apropiadas. Generar un reporte con los resultados obtenidos de la salida del test.
+
+#### Solución
+
+Creamos la carpeta /tests con las pruebas, además de unos comando para npm
+
+```c
+    "test-axios": "mocha tests/axios.tests.js",
+    "test-supertest": "mocha tests/supertest.tests.js"
+```
+
+Resultados:
+![Pruebas axios](tests/axios.png)
+
+![Pruebas supertests](tests/supertest.png)
+
 # MEJORAR LA ARQUITECTURA DE NUESTRA API (desafio 20) 
 ### Consignas 
 - Modificar la capa de persistencia incorporando los conceptos de Factory, DAO, y DTO.
@@ -98,4 +125,10 @@ La tercera entrega contiene una interfaz con handlebars. Por default, las rutas 
 | http://localhost:8080/ordenes| Las ordenes generadas por el usuario|
 | http://localhost:8080/ordenes/admin| Las ordenes generadas por todos los usuarios, únicamente para usuarios administradores|
 
+## Rutas API:
+El router base '/api/productos' implementa cuatro funcionalidades:
+- GET: '/:id?' - Me permite listar todos los productos disponibles ó un producto por su id
+- POST: '/' - Para incorporar productos al listado
+- PUT: '/:id' - Actualiza un producto por su id
+- DELETE: '/:id' - Borra un producto por su id
 

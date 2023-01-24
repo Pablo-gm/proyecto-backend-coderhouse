@@ -4,7 +4,9 @@
   "description": "Basándose en los contenedores ya desarrollados (memoria, archivos) desarrollar dos contenedores más (que cumplan con la misma interfaz) que permitan realizar las operaciones básicas de CRUD en MongoDb (ya sea local o remoto) y en Firebase. Luego, para cada contenedor, crear dos clases derivadas, una para trabajar con Productos, y otra para trabajar con Carritos.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-axios": "mocha tests/axios.tests.js",
+    "test-supertest": "mocha tests/supertest.tests.js"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +32,10 @@
     "socket.io": "^4.5.4",
     "twilio": "^3.84.0",
     "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
   }
 }

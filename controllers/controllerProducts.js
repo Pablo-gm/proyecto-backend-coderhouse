@@ -6,6 +6,86 @@ class ProductsController {
         this.Products = new ProductsService();
     }
 
+    // API methods
+    getProductsAPI = async (req, res) => {
+        let products;
+        let error;
+        if(req.params.id){
+            const product = await this.Products.getProductById(req.params.id);
+            if(product.status === 'error'){
+                req.flash('error', `No se encontró producto con id: ${req.params.id}`);
+                error = product.message;
+            }else{
+                products = [new productDTO(product.data)];
+            }
+        }else{
+            const allProducts = await this.Products.getAllProducts();
+
+            if(allProducts.status === 'error'){
+                error = allProducts.message;
+                req.flash('error', error);
+            }else{
+                products = allProducts.data.map(p => new productDTO(p));
+            }
+        }
+
+        res.json(products);
+    }
+
+    addProductAPI = async (req, res) => {
+        let result;
+        const {title, price, thumbnail, description, stock, category} = req.body;
+        
+        const newProduct = {
+            title,
+            price,
+            thumbnail,
+            description,
+            stock,
+            category,
+            code: `CODE_${Date.now()}`,
+        }
+        // maybe validate no parameter is missing?
+        if(!title || !price || !thumbnail || !description || !stock){
+            result = { error: `Todos los campos son necesarios para agregar un producto.`}
+        }else{
+            const answer = await this.Products.addProduct(newProduct);
+            result = answer;
+            req.flash(answer.status, answer.message);
+        }
+        res.json(result);
+    }
+
+    updateProductAPI = async (req, res) => {
+        const id = req.params.id;
+        if(id){
+            const {title, price, thumbnail, description, stock, category}  = req.body;
+            const tempProduct = {
+                title,
+                price,
+                category,
+                thumbnail,
+                description,
+                stock,
+            }
+        
+            const answer = await this.Products.updateProduct(id, tempProduct);
+            res.json(answer);
+        }else{
+            res.json({error: "No se envió Id."});
+        }
+    }
+
+    deleteProductAPI = async (req, res) => {
+        const id = req.params.id;
+        if(id){
+            const answer = await this.Products.deleteProductById(id);
+            res.json(answer);
+        }else{
+            res.json({error: "No se envió Id."});
+        }
+    }
+
     //Get all products or product selected by id
     getProducts = async (req, res) => {
         let products;
@@ -74,26 +154,6 @@ class ProductsController {
         }
     
         res.redirect('./productos');
-    }
-
-    updateProduct = async (req, res) => {
-        const id = req.params.id;
-        if(id){
-            const {title, price, thumbnail, description, stock, category}  = req.body;
-            const tempProduct = {
-                title,
-                price,
-                category,
-                thumbnail,
-                description,
-                stock,
-            }
-        
-            const answer = await this.Products.updateProduct(id, tempProduct);
-            res.json(answer);
-        }else{
-            res.json({error: "No se envió Id."});
-        }
     }
 
     updateProductAndRedirect = async (req, res) => {

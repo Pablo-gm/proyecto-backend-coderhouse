@@ -3,3 +3,8 @@
 {"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-03 14:41:18"}
 {"level":"warn","message":"Route: /socket.io/socket.io.js Method: GET Error: Ruta no implementada","timestamp":"2023-01-18 17:47:56"}
 {"level":"warn","message":"Route: /socket.io/socket.io.js Method: GET Error: Ruta no implementada","timestamp":"2023-01-18 17:48:46"}
+{"level":"warn","message":"Route: /api/productos/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 16:59:46"}
+{"level":"warn","message":"Route: /api/productos/view Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 17:00:26"}
+{"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 17:00:26"}
+{"level":"warn","message":"Route: /api/productos/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 17:00:28"}
+{"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 17:00:29"}
