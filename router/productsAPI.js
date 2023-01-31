@@ -10,5 +10,7 @@ router.get('/:id?', productsController.getProductsAPI);
 router.post('/', productsController.addProductAPI);
 router.put('/:id', productsController.updateProductAPI);
 router.delete('/:id', productsController.deleteProductAPI);
+router.get('/categoria/:category?', productsController.getProductsByCategoryAPI);
+
 
 module.exports = router;

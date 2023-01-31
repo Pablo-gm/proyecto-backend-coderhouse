@@ -14,6 +14,14 @@ class MessageService {
         }
     }
 
+    async getMyMessages(email) {
+        try {
+            return await messageRepo.getMyMessages(email);
+        } catch (err) {
+            errorLogger.error(`Error: ${err}`);
+        }
+    }
+
     async addMessage(message) {
         try {
             return await messageRepo.save(message);

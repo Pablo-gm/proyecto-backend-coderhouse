@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-12 col-lg-12">
-        <h4>Productos:</h4>
+        <h4>Productos de  <span class="text-warning">{{category}}</span>:</h4>
         {{#if is_admin}}
         <div class="text-end mb-3">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
@@ -17,7 +17,6 @@
                                 <th class="text-center">Thumbnail</th>
                                 <th class="w-100">Nombre</th>
                                 <th class="">Descripción</th>
-                                <th>Categoría</th>
                                 <th class="">Código</th>
                                 <th class="text-end">Precio</th>
                                 <th class="text-end">Stock</th>
@@ -31,7 +30,6 @@
                                 <td class="text-center"><img src="{{this.thumbnail}}" alt="{{this.title}}" class="product-img"></td>
                                 <td class="">{{this.title}} <br> <span class="text-secondary">{{this.id}}</span> </td>
                                 <td class="">{{this.description}}</td>
-                                <td><a  href="../productos/categoria/{{this.category}}">{{this.category}}</a></td>
                                 <td class="">{{this.code}}</td>
                                 <td class="text-end">${{this.price}}</td>
                                 <td class="text-end">{{this.stock}}</td>
@@ -39,12 +37,12 @@
                                 <td class="text-end">
                                     <div class="d-flex">
                                         {{#if ../is_admin}}
-                                        <a class="btn btn-primary ms-1" href="../productos/update/{{this.id}}" role="button"><i class="bi bi-pen"></i><span class="visually-hidden">Actualizar</span></a>
+                                        <a class="btn btn-primary ms-1" href="../../productos/update/{{this.id}}" role="button"><i class="bi bi-pen"></i><span class="visually-hidden">Actualizar</span></a>
                                         <span class="btn btn-danger delete-js ms-1" data-title="{{this.title}}" data-id="{{this.id}}" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                             <i class="bi bi-trash"></i><span class="visually-hidden">Eliminar</span>
                                         </span>
                                         {{else}}
-                                        <form action="../carrito/addProduct" method="POST" class="d-flex">
+                                        <form action="../../carrito/addProduct" method="POST" class="d-flex">
                                             <select class="form-select me-1 quantity-select" aria-label="cantidad de producto" name="quantity">
                                                 <option selected value="1">1</option>
                                                 <option value="2">2</option>
@@ -79,7 +77,7 @@
         <h5 class="modal-title" id="addModalLabel">Agregar producto</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="" action="./productos" method="post">
+      <form class="" action="../../productos" method="post">
         <div class="modal-body">
             <div class="row g-3">
                 <div class="col-12">
@@ -124,7 +122,7 @@
         <h5 class="modal-title" id="deleteModalLabel">Eliminar producto</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="" action="../productos/delete/" method="post">
+      <form class="" action="../../productos/delete/" method="post">
         <div class="modal-body">
             <p>Deseas eliminar el producto <strong id="delete-text"></strong>?</p>
             <input id="id" name="id" type="hidden" value="">

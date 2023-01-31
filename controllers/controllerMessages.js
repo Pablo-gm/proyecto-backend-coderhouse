@@ -11,6 +11,20 @@ class MessagesController {
         res.render('pages/messagesIO', { notifications: req.flash(), use_chat: 1 } );
     }
 
+    getMyMessages = async (req, res) => {
+        let messages;
+        const allMessages = await this.Messages.getMyMessages(req.user.email);
+
+        if(allMessages.status === 'error'){
+            error = allMessages.message;
+            req.flash('error', error);
+        }else{
+            messages = allMessages.data.map(m => new messageDTO(m));
+        }
+
+        res.render('pages/messages', {messages, notifications: req.flash() } );
+    }
+
     getMessagesStatic = async (req, res) => {
         let messages;
         const allMessages = await this.Messages.getAllMessages();

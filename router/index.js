@@ -6,10 +6,12 @@ const productAPIRouter = require('./productsAPI');
 const cartRouter = require('./carts');
 const orderRouter = require('./orders')
 const messageRouter = require('./messages')
+const otherRouter = require('./others')
 
 const router = Router();
 
 router.use("/", userRouter);
+router.use("/extra", otherRouter);
 router.use("/productos", productRouter);
 router.use("/api/productos", productAPIRouter);
 router.use("/carrito", cartRouter);

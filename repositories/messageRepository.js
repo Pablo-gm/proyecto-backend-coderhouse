@@ -9,6 +9,10 @@ class MessageRepo {
         return await this.dao.getAll();
     }
 
+    async getMyMessages(email) {
+        return await this.dao.getMyMessages(email);
+    }
+
     async save(message) {
         return await this.dao.save(message);
     }

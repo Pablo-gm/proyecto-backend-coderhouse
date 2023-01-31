@@ -32,6 +32,24 @@ class ProductsController {
         res.json(products);
     }
 
+    //Get all products or product selected by category
+    getProductsByCategoryAPI = async (req, res) => {
+        let products;
+        let message;
+        if(req.params.category){
+            const allProducts = await this.Products.getProductsByCategory(req.params.category);
+            if(allProducts.status === 'error'){
+                message = allProducts.message;
+            }else{
+                products = allProducts.data.map(p => new productDTO(p));
+                message = allProducts.status;
+            }
+        }else{
+            req.flash('error', `La categoria es necesaria.`);
+        }
+        res.json({ products, message});
+    }
+
     addProductAPI = async (req, res) => {
         let result;
         const {title, price, thumbnail, description, stock, category} = req.body;
@@ -131,6 +149,25 @@ class ProductsController {
         }
     
         res.render('pages/updateProduct', {product , notifications: req.flash() } );
+    }
+
+    //Get all products or product selected by category
+    getProductsByCategory = async (req, res) => {
+        let products;
+        let error;
+        if(req.params.category){
+            const allProducts = await this.Products.getProductsByCategory(req.params.category);
+            if(allProducts.status === 'error'){
+                req.flash('error', `No se encontró producto con categoria: ${req.params.category}`);
+                error = allProducts.message;
+            }else{
+                products = allProducts.data.map(p => new productDTO(p));
+            }
+        }else{
+            req.flash('error', `La categoria es necesaria.`);
+        }
+
+        res.render('pages/productsCategory', {products, category: req.params.category, notifications: req.flash() } );
     }
 
     addProduct = async (req, res) => {

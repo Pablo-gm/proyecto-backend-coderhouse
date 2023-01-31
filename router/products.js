@@ -15,6 +15,8 @@ router.post('/update', checkAdmin, productsController.updateProductAndRedirect);
 
 router.post('/delete', checkAdmin, productsController.deleteProductAndRedirect);
 
+router.get('/categoria/:category?', checkAuthentication, productsController.getProductsByCategory);
+
 //router.put('/view/:id', updateProduct);
 
 module.exports = router;

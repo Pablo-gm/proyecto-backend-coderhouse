@@ -18,8 +18,8 @@ class ProductRepo {
 
     }
 
-    async getByIdArray(ids) {
-        return await this.dao.getByIdArray(ids);
+    async getProductsByCategory(category) {
+        return await this.dao.getProductsByCategory(category);
     }
 
     async save(product) {

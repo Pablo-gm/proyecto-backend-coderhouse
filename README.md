@@ -123,10 +123,11 @@ La tercera entrega contiene una interfaz con handlebars. Por default, las rutas 
 |--------------|-----------|
 | http://localhost:8080| Login de usuario|
 | http://localhost:8080/signup| Signup de usuario|
-| http://localhost:8080/productos| Listado de productos, un administrador puede modificar el inventario de productos|
+| http://localhost:8080/productos/:id?| Listado de productos, un administrador puede modificar el inventario de productos|
 | http://localhost:8080/carrito| Los productos agregados al carrito|
 | http://localhost:8080/ordenes| Las ordenes generadas por el usuario|
 | http://localhost:8080/ordenes/admin| Las ordenes generadas por todos los usuarios, únicamente para usuarios administradores|
+| http://localhost:8080/extra/info| Configuración del servidor|
 
 ## Rutas API:
 El router base '/api/productos' implementa cuatro funcionalidades:
@@ -134,4 +135,5 @@ El router base '/api/productos' implementa cuatro funcionalidades:
 - POST: '/' - Para incorporar productos al listado
 - PUT: '/:id' - Actualiza un producto por su id
 - DELETE: '/:id' - Borra un producto por su id
+- GET: 'categoria/:category?' - Me permite listar todos los productos disponibles ó un producto que pertenezcan a una categoria
 

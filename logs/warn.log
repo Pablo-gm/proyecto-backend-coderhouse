@@ -8,3 +8,14 @@
 {"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 17:00:26"}
 {"level":"warn","message":"Route: /api/productos/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 17:00:28"}
 {"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-23 17:00:29"}
+{"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 17:06:13"}
+{"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 17:07:57"}
+{"level":"warn","message":"Route: /avatar/ Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 17:08:42"}
+{"level":"warn","message":"Route: /category/otra Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 17:42:21"}
+{"level":"warn","message":"Route: /productos/carrito/addProduct Method: POST Error: Ruta no implementada","timestamp":"2023-01-30 17:54:26"}
+{"level":"warn","message":"Route: /productos/categoria/productos Method: POST Error: Ruta no implementada","timestamp":"2023-01-30 17:57:27"}
+{"level":"warn","message":"Route: /productos/productos Method: POST Error: Ruta no implementada","timestamp":"2023-01-30 17:59:37"}
+{"level":"warn","message":"Route: /chat/my Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:13:40"}
+{"level":"warn","message":"Route: /chat/personal Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:13:56"}
+{"level":"warn","message":"Route: /personal Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:14:26"}
+{"level":"warn","message":"Route: /personal Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:17:11"}
