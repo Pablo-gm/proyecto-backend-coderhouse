@@ -3,7 +3,7 @@ const {twilioConfig, IGNORE_TWILIO} = require('../config/options')
 const {errorLogger} = require('./logger');
 
 
-const client = twilio(twilioConfig.id, twilioConfig.token);
+const client = IGNORE_TWILIO ? 1 : twilio(twilioConfig.id, twilioConfig.token);
 
 // Ignoramos toNumber para usar el sandbox de twitlio
 const sendSMS = async (content, toNumber) => {

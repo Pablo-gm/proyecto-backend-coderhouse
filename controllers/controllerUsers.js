@@ -1,16 +1,18 @@
+const UsersService = require('../services/userService');
+const userDTO = require('../dtos/userDTO');
 
 class UsersController {
-    constructor() {}
-        
-    // Login
+    constructor() {
+        this.Users = new UsersService();
+    }
+    // Web methods
+
     login = (req, res) => {
         var error = req.flash('error');
         return res.render("pages/login.hbs", {hide_navigation: 1, error});
     };
 
     loginUser = (req, res) => {
-        //const {username} = req.body;
-        //req.session.username = req.user.username;
         return res.redirect("/productos");
     };
 
@@ -18,9 +20,7 @@ class UsersController {
         return res.render("pages/loginfail.hbs", {hide_navigation: 1});
     };
 
-    // Signup
     signup = (req, res) => {
-        //var message = req.flash('message')
         return res.render("pages/signup.hbs", {hide_navigation: 1});
     };
 
@@ -29,12 +29,10 @@ class UsersController {
     };
 
     failSignup = (req, res) => {
-        //var message = req.flash('message')
         const error = req.flash('error');
         return res.render("pages/signupfail.hbs", {error, hide_navigation: 1});
     };
 
-    // Logout
     logoutUser = (req, res) => {
         const username = req.session.username; 
         req.session.destroy((err) => {
@@ -46,12 +44,25 @@ class UsersController {
         });
     };
 
-
     profileUser = (req, res) => {
-        //const {username} = req.body;
-
         const user = req.user ? req.user.toObject() : {};
         res.render("pages/profile.hbs", {user});
+    };
+
+    profileUserAPI = async (req, res) => {
+        const loggedUser = req.user ? req.user : 0;
+        let user = {error: 'Usuario no encontrado'};
+
+        if(loggedUser){
+            const answer = await this.Users.getUserById(loggedUser.id || loggedUser._id);
+            if(answer.status === 'error'){
+                user = {error: answer.message};
+            }else{
+                user = new userDTO(answer.data);
+            }
+        }
+
+        res.json({user});
     };
 
 }

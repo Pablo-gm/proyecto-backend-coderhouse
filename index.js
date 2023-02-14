@@ -59,17 +59,6 @@ if (isCluster) {
     initServer(PORT);
 }
 
-/*
-const server = app.listen(PORT, async () => {
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ecommerce', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
-    console.log(`Servidor http escuchando en el puerto ${server.address().port}`)
-});
-
-server.on('error', () => console.log(`Error: ${err}`));
-*/
 app.use(cookieParser());
 app.use(session({
     store: MongoStore.create({

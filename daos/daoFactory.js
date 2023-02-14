@@ -18,15 +18,6 @@ switch (method) {
         Orders = om.getInstance();
         Messages = mm.getInstance();
         break;
-    case "firebase":
-        const pf = require('./productDaoFirebase');
-        const cf = require('./cartDaoFirebase');
-        // fix later if possible
-        const uf = require('./userDaoMongo');
-        Products = new pf();
-        Carts = new cf();
-        User = new uf();
-        break
     default:
         const pd = require('./productDaoMongo');
         const cd = require('./cartDaoMongo');

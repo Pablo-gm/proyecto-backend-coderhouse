@@ -8,46 +8,45 @@ class ProductsController {
 
     // API methods
     getProductsAPI = async (req, res) => {
-        let products;
-        let error;
-        if(req.params.id){
-            const product = await this.Products.getProductById(req.params.id);
+        let result = {};
+        if(req.query.id){
+            const product = await this.Products.getProductById(req.query.id);
             if(product.status === 'error'){
-                req.flash('error', `No se encontró producto con id: ${req.params.id}`);
-                error = product.message;
+                result.error =  `No se encontró producto con id: ${req.query.id}`;
             }else{
-                products = [new productDTO(product.data)];
+                result.products = [new productDTO(product.data)];
+                result.status = product.status;
             }
         }else{
             const allProducts = await this.Products.getAllProducts();
 
             if(allProducts.status === 'error'){
-                error = allProducts.message;
-                req.flash('error', error);
+                result.error = allProducts.message;
             }else{
-                products = allProducts.data.map(p => new productDTO(p));
+                result.products = allProducts.data.map(p => new productDTO(p));
+                result.status = allProducts.status;
             }
         }
 
-        res.json(products);
+        res.json(result);
     }
 
     //Get all products or product selected by category
     getProductsByCategoryAPI = async (req, res) => {
-        let products;
-        let message;
-        if(req.params.category){
-            const allProducts = await this.Products.getProductsByCategory(req.params.category);
+        let result = {};
+        if(req.query.category){
+            const allProducts = await this.Products.getProductsByCategory(req.query.category);
             if(allProducts.status === 'error'){
-                message = allProducts.message;
+                result.error = allProducts.message;
             }else{
-                products = allProducts.data.map(p => new productDTO(p));
-                message = allProducts.status;
+                result.status = allProducts.status;
+                result.products = allProducts.data.map(p => new productDTO(p));
             }
+             
         }else{
-            req.flash('error', `La categoria es necesaria.`);
+            result.error = `La categoria es necesaria.`
         }
-        res.json({ products, message});
+        res.json({ result});
     }
 
     addProductAPI = async (req, res) => {
@@ -69,13 +68,12 @@ class ProductsController {
         }else{
             const answer = await this.Products.addProduct(newProduct);
             result = answer;
-            req.flash(answer.status, answer.message);
         }
         res.json(result);
     }
 
     updateProductAPI = async (req, res) => {
-        const id = req.params.id;
+        const id = req.body.id;
         if(id){
             const {title, price, thumbnail, description, stock, category}  = req.body;
             const tempProduct = {
@@ -95,7 +93,7 @@ class ProductsController {
     }
 
     deleteProductAPI = async (req, res) => {
-        const id = req.params.id;
+        const id = req.body.id;
         if(id){
             const answer = await this.Products.deleteProductById(id);
             res.json(answer);
@@ -103,6 +101,8 @@ class ProductsController {
             res.json({error: "No se envió Id."});
         }
     }
+
+    // Web methods
 
     //Get all products or product selected by id
     getProducts = async (req, res) => {

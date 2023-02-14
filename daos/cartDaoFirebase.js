@@ -40,7 +40,6 @@ class CartsFirebase extends Container {
             await this.collection.doc(id).update({
                 products: newCartProducts
             });
-            // products: this.FieldValue.arrayUnion(product)
 
             return { status: 'success', message: 'Producto agregado al carrito.' };
         } catch (err) {

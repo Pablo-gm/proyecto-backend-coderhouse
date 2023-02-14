@@ -8,10 +8,13 @@ const DAO_METHOD = process.env.DAO_METHOD || args.DAO || 'mongodb';
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ecommerce';
 const PORT = process.env.PORT || 8080;
 const USE_CLUSTER = process.env.USE_CLUSTER || 0;
-const SESSION_LIMIT = process.env.SESSION_LIMIT || 900000;
+const SESSION_LIMIT = process.env.SESSION_LIMIT ? (process.env.SESSION_LIMIT | 0) : 900000;
 
+// JWT
+const JWT_SECRET = process.env.JWT_SECRET || "SUPER_SECRET";
 
 // Nodemailer Gmail
+const IGNORE_EMAIL = process.env.IGNORE_EMAIL | 0;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || '';
 const ADMIN_EMAIL_PASS = process.env.ADMIN_EMAIL_PASS || '';
 const NOTIFICATIONS_EMAIL = process.env.NOTIFICATIONS_EMAIL || '';
@@ -43,4 +46,4 @@ const firebaseConfig = {
     }
 }
 
-module.exports = {DAO_METHOD, MONGO_URI, PORT, USE_CLUSTER, SESSION_LIMIT, ADMIN_EMAIL, ADMIN_EMAIL_PASS, NOTIFICATIONS_EMAIL,IGNORE_TWILIO, twilioConfig,  firebaseConfig};
+module.exports = {DAO_METHOD, MONGO_URI, PORT, USE_CLUSTER, SESSION_LIMIT, JWT_SECRET, IGNORE_EMAIL, ADMIN_EMAIL, ADMIN_EMAIL_PASS, NOTIFICATIONS_EMAIL,IGNORE_TWILIO, twilioConfig,  firebaseConfig};

@@ -16,6 +16,5 @@
 {"level":"warn","message":"Route: /productos/categoria/productos Method: POST Error: Ruta no implementada","timestamp":"2023-01-30 17:57:27"}
 {"level":"warn","message":"Route: /productos/productos Method: POST Error: Ruta no implementada","timestamp":"2023-01-30 17:59:37"}
 {"level":"warn","message":"Route: /chat/my Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:13:40"}
-{"level":"warn","message":"Route: /chat/personal Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:13:56"}
-{"level":"warn","message":"Route: /personal Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:14:26"}
-{"level":"warn","message":"Route: /personal Method: GET Error: Ruta no implementada","timestamp":"2023-01-30 18:17:11"}
+{"level":"warn","message":"Route: /api/carrito/removeProduct/../carrito Method: GET Error: Ruta no implementada","timestamp":"2023-02-14 10:19:54"}
+{"level":"warn","message":"Route: /api/carrito/cleanCart/../../productos Method: GET Error: Ruta no implementada","timestamp":"2023-02-14 10:21:45"}

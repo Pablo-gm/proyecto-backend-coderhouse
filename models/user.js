@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-// cart id..
 const userSchema = new Schema(
     {
         username: { type: String, required: true },

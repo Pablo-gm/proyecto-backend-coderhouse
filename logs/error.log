@@ -2,4 +2,11 @@
 {"level":"error","message":"Error: el usuario con email: admin@admin.com no existe","timestamp":"2023-01-03 10:29:51"}
 {"level":"error","message":"Error: Error: getaddrinfo ENOTFOUND gmail","timestamp":"2023-01-03 11:22:18"}
 {"level":"error","message":"Error: admin@mail.com passsord incorrecto","timestamp":"2023-01-10 11:11:12"}
-{"level":"error","message":"Error: TypeError: productRepo.getAll is not a function","timestamp":"2023-01-17 10:19:07"}
+{"level":"error","message":"Error: TypeError: productRepo.getAll is not a function","timestamp":"2023-01-17 10:19:07"}{"level":"error","message":"Error: test@mail.com passsord incorrecto","timestamp":"2023-02-09 12:12:43"}
+{"level":"error","message":"Error: test@mail.com passsord incorrecto","timestamp":"2023-02-09 12:15:49"}
+{"level":"error","message":"Error: test@mail.com passsord incorrecto","timestamp":"2023-02-09 12:18:40"}
+{"level":"error","message":"Error: test@mail.com passsord incorrecto","timestamp":"2023-02-09 12:20:40"}
+{"level":"error","message":"Error: test@mail.com passsord incorrecto","timestamp":"2023-02-09 12:24:08"}
+{"level":"error","message":"Error: CastError: Cast to ObjectId failed for value \"categoria\" (type string) at path \"_id\" for model \"products\"","timestamp":"2023-02-12 11:52:50"}
+{"level":"error","message":"Error: admin@mail.com passsord incorrecto","timestamp":"2023-02-14 09:56:12"}
+{"level":"error","message":"Error: test@mail.com passsord incorrecto","timestamp":"2023-02-14 09:56:24"}

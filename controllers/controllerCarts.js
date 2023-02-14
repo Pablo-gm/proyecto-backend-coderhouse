@@ -9,6 +9,100 @@ class CartsController {
         this.Carts = new CartsService();
     } 
 
+    // API methods
+    getCartAPI = async (req, res) => {
+        let cart;
+        let products;
+        let total = 0;
+        let result = {};
+
+        if(req.user){
+            const answer = await this.Carts.getCartById(req.user.cart);
+            if(answer.status === 'error'){
+                result.error = `No se encontró carrito con id: ${req.params.id}`;
+            }else{
+                cart = new cartDTO(answer.data);
+
+                const productsIds = cart.products.map(p => p.product);
+                const productsAnswer = await this.Products.getProductsByIdArray(productsIds);
+
+                if(productsAnswer.status === 'error'){
+                    result.error = `Error al obtener productos del carrito`;
+                }else{
+                    products = [];
+                    productsAnswer.data.forEach( (p, index) => {
+                        total +=  p.price * cart.products[index].quantity;
+                        const tempProduct = {product: new productDTO(p), quantity: cart.products[index].quantity, total: p.price * cart.products[index].quantity};
+                        products.push(tempProduct);
+                    })
+                    result.products = products;
+                    result.cart = cart;
+                    result.total = total;
+                }
+            }
+        }else{
+            result.error = 'El usuario no tiene una sesión activa';
+        }
+
+        res.json(result);
+    }
+
+    addProductToCartAPI = async (req, res) => {
+        const {pid, quantity} = req.body;
+        const id = req.user ? req.user.cart : null;
+        const q = parseInt(quantity);
+        let result = {};
+
+        if(q && q < 0 ){
+            result.error = 'La cantidad no es válida.';
+        }else{
+            if(id && pid){
+                const answer = await this.Carts.addProductToCart(id,pid,q);
+                if(answer.status === 'error'){
+                    result.error = answer.message;
+                }else{
+                    result.status = answer.status;
+                    result.message = `Producto agregado al carrito.`;
+                }
+            }else{
+                result.error = 'El ID del producto y el carrito son necesarios.';
+            }
+        }
+
+        res.json(result);
+    }
+
+    removeProductFromCartAPI = async (req, res) => {
+        const {pid} = req.body;
+        const id = req.user ? req.user.cart : null;
+        let result = {};
+
+        if(id && pid){
+            const answer = await this.Carts.removeProductFromCart(id,pid);
+            result = answer;
+        }else{
+            result.error = 'El ID del producto y el carrito son necesarios.';
+        }
+
+        res.json(result);
+    }
+
+    cleanCartAPI = async (req, res) => {
+        const id = req.user ? req.user.cart : null;
+        let result = {};
+
+        if(id){
+            const answer = await this.Carts.cleanCart(id);
+            result = answer;
+        }else{
+            result.error = 'El ID del carrito es necesario.';
+        }
+
+        res.json(result);
+    }
+
+    // Web methods
+
     getCart = async (req, res) => {
         let cart;
         let products;
@@ -36,7 +130,7 @@ class CartsController {
                 }
             }
         }else{
-            req.flash('error', 'El ID es requerido');
+            req.flash('error', 'El usuario no tiene una sesión activa');
         }
 
         res.render('pages/cart', {cart, products, total, notifications: req.flash() } );
@@ -140,10 +234,7 @@ class CartsController {
         res.redirect(`../../productos`);
     }
 
-
 }
-
-
 
 
 module.exports = CartsController;

@@ -1,5 +1,5 @@
 const { createTransport } = require('nodemailer');
-const { ADMIN_EMAIL_PASS, ADMIN_EMAIL } = require('../config/options');
+const { IGNORE_EMAIL, ADMIN_EMAIL_PASS, ADMIN_EMAIL } = require('../config/options');
 const {errorLogger} = require('./logger');
 
 const transporter = createTransport({
@@ -12,6 +12,7 @@ const transporter = createTransport({
 });
 
 const sendEmail = async (options) => {
+    if(IGNORE_EMAIL) { return 1 }
     try {
         const info = await transporter.sendMail(options);
         return info;

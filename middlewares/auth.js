@@ -5,7 +5,7 @@ const User = require('../models/user');
 const { Carts } = require('../daos/daoFactory');
 const {errorLogger} = require('../utils/logger');
 const sendEmail = require('../utils/nodemailerGmail');
-const { ADMIN_EMAIL, NOTIFICATIONS_EMAIL } = require('../config/options')
+const { ADMIN_EMAIL, NOTIFICATIONS_EMAIL, JWT_SECRET } = require('../config/options')
 
 const isValidPassword = (user, password) => {
     return bcrypt.compareSync(password, user.password);
@@ -114,7 +114,7 @@ passport.use('signup', new LocalStrategy({
                         `
                     }
 
-                    //const emailAnswer = await sendEmail(mailOptions);
+                    const emailAnswer = await sendEmail(mailOptions);
 
                     return done(null, userWithId);
                 });
@@ -151,5 +151,45 @@ const checkAdmin = (req, res, next) => {
     }
 }
 
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 
-module.exports = { checkAuthentication, checkAdmin} ;
+const getJWTstrategy = () => {
+    passport.use(
+        new JWTstrategy(
+            {
+                secretOrKey: JWT_SECRET,
+                jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+            },
+            async (token, done) => {
+                try {
+                    return done(null, token.user);
+                } catch (error) {
+                    errorLogger.error(`Error: ${error}`);
+                    done(error);
+                }
+            }
+        )
+    );
+}
+
+function checkAuthenticationAPI (req, res, next){
+    passport.authenticate('jwt', { session: false }, function(err, user, info) { 
+        if (err) { return next(err); } 
+        if (!user) { return  res.json({error: `Usuario no logeado`}).end(); } 
+        req.user = user;
+        next();
+    })(req, res, next);
+}
+
+const checkAdminAPI = (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, function(err, user, info) { 
+        if (err) { return next(err); } 
+        if (!user) { return  res.json({error: `Usuario no logeado`}).end(); } 
+        if (!user.is_admin) { return  res.json({error: `No cuentas con permisos para ver la ruta '${req.originalUrl}'`}).end(); } 
+        req.user = user;
+        next();
+    })(req, res, next);
+}
+
+module.exports = { checkAuthentication, checkAdmin, getJWTstrategy, checkAuthenticationAPI, checkAdminAPI} ;

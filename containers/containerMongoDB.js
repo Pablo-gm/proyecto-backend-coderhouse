@@ -26,7 +26,6 @@ class Container {
     async getAll() {
         try {
             // we use lean() for handlebars
-            //const docs = await this.model.find({});
             const docs = await this.model.find({}).lean().then(ds => {
                 if (ds.length) {
                     return ds.map(d => {
@@ -45,7 +44,6 @@ class Container {
 
     async getById(id) {
         try { 
-            //const doc = await this.model.findById(id);
             const doc = await this.model.findById(id).lean();
             return { status: 'success', message: 'Documento encontrado.', data: {id: doc._id, ...doc}}
         } catch (err) {
@@ -56,7 +54,6 @@ class Container {
 
     async getByIdArray(ids) {
         try { 
-            //const doc = await this.model.findById(id);
             const docs = await this.model.find({ _id: { $in: ids } }).lean().then(ds => {
                 if (ds.length) {
                     return ds.map(d => {

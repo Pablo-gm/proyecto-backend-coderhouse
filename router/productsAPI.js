@@ -1,16 +1,20 @@
 
 const { Router } = require('express');
 const router = Router();
-const {checkAuthentication, checkAdmin} = require('../middlewares/auth');
+const {getJWTstrategy, checkAuthenticationAPI, checkAdminAPI} = require('../middlewares/auth');
+
 const ProductsController = require('../controllers/controllerProducts');
 
 const productsController = new ProductsController();
 
-router.get('/:id?', productsController.getProductsAPI);
-router.post('/', productsController.addProductAPI);
-router.put('/:id', productsController.updateProductAPI);
-router.delete('/:id', productsController.deleteProductAPI);
-router.get('/categoria/:category?', productsController.getProductsByCategoryAPI);
+getJWTstrategy();
+
+router.get('/categoria/:category?', checkAuthenticationAPI, productsController.getProductsByCategoryAPI);
+router.get('/:id?', checkAuthenticationAPI, productsController.getProductsAPI);
+router.post('/', checkAdminAPI, productsController.addProductAPI);
+router.put('/', checkAdminAPI, productsController.updateProductAPI);
+router.delete('/', checkAdminAPI, productsController.deleteProductAPI);
+
 
 
 module.exports = router;
